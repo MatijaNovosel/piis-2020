@@ -63,6 +63,7 @@ export default defineComponent({
   height: var(--navbar-height);
   max-height: var(--navbar-height);
   box-shadow: 0px 3px 9px #888888;
+  background-color: white;
 }
 .navbar-logo {
   position: absolute;
