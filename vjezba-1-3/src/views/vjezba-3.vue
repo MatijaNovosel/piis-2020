@@ -1,6 +1,13 @@
 <template>
-  <div class="text-center">
-    <span style="font-size: 40px" class="badge badge-pill badge-primary">Vježba 3</span>
+  <div class="row text-center no-gutters">
+    <div class="col-12">
+      <span style="font-size: 20px" class="badge badge-pill badge-primary"
+        >Vježba 3</span
+      >
+    </div>
+    <div class="col-12 mt-5">
+      <img :src="require('../assets/elevator-diagram.png')" />
+    </div>
   </div>
 </template>
 
