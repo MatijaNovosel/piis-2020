@@ -1,4 +1,4 @@
-# piis
+# vjezba-1
 
 ## Project setup
 ```
