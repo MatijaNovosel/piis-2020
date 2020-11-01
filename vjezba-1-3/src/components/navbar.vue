@@ -92,6 +92,7 @@ export default defineComponent({
   padding: 6px 12px;
   background-color: #273849;
   color: white;
+  user-select: none;
 }
 .pill:hover {
   background-color: grey;
