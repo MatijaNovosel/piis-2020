@@ -9,3 +9,11 @@
 body {
   font: 400 13.3333px Arial;
 }
+
+.digital-clock-font {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.shadow {
+  box-shadow: 5px 5px 4px #888888 !important;
+}

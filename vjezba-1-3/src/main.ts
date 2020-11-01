@@ -7,7 +7,15 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@/assets/css/site.css";
 
-createApp(App)
-  .use(store)
-  .use(router)
-  .mount("#app");
+import GroupBox from "@/components/group-box.vue";
+
+const app = createApp(App);
+
+// Plugins
+app.use(store);
+app.use(router);
+
+// Global components
+app.component("group-box", GroupBox);
+
+app.mount("#app");

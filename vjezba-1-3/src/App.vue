@@ -22,6 +22,6 @@ export default defineComponent({
 
 <style>
 .navbar-offset {
-  margin-top: calc(var(--navbar-height));
+  margin-top: calc(var(--navbar-height) - 25px);
 }
 </style>

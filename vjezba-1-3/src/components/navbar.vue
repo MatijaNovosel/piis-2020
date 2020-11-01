@@ -6,21 +6,21 @@
         <li class="nav-item mr-3">
           <span
             @click="redirect({ name: 'vjezba-1-sat' })"
-            class="badge badge-pill pill"
+            class="badge badge-pill pill shadow"
             >Vježba 1 - Sat</span
           >
         </li>
         <li class="nav-item mr-3">
           <span
             @click="redirect({ name: 'vjezba-1-dizalo' })"
-            class="badge badge-pill pill"
+            class="badge badge-pill pill shadow"
             >Vježba 1 - Dizalo</span
           >
         </li>
         <li class="nav-item">
           <span
             @click="redirect({ name: 'vjezba-3' })"
-            class="badge badge-pill pill"
+            class="badge badge-pill pill shadow"
             >Vježba 3</span
           >
         </li>
@@ -80,7 +80,6 @@ export default defineComponent({
 .pill {
   font-size: 12px;
   cursor: pointer;
-  box-shadow: 5px 5px 4px #888888;
   padding: 6px 12px;
   background-color: #273849;
   color: white;
