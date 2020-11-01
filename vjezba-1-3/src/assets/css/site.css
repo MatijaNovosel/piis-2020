@@ -1,0 +1,11 @@
+:root {
+  --navbar-height: 65px;
+  --vue-logo-green: #41b883;
+  --vue-logo-blue: #35495e; 
+  --border-color-dark: rgba(255, 255, 255, 0.6);
+  --border-color-light: rgba(0, 0, 0, 0.12);
+}
+
+body {
+  font: 400 13.3333px Arial;
+}
