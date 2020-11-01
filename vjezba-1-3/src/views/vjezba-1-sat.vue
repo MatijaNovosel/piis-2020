@@ -132,7 +132,7 @@ export default defineComponent({
 .clock {
   font-size: 25px;
   background-color: black;
-  color: var(--vue-logo-green);
+  color: hotpink;
   padding: 12px;
   border-radius: 10px;
   width: 200px;

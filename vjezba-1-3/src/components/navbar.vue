@@ -1,12 +1,16 @@
 <template>
   <nav class="navbar sticky-top navbar-expand navbar-light navbar-general">
-    <span class="navbar-logo"><logo class="mr-3 mb-1" />PIIS 2020 <span class="subtitle-text ml-2">Matija Novosel</span></span>
+    <span class="navbar-logo"
+      ><logo class="mr-3 mb-1" />PIIS 2020
+      <span class="subtitle-text ml-2">Matija Novosel</span></span
+    >
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item mr-3">
           <span
             @click="redirect({ name: 'vjezba-1-sat' })"
             class="badge badge-pill pill shadow"
+            :class="{ 'active-route': route.name == 'vjezba-1-sat' }"
             >Vježba 1 - Sat</span
           >
         </li>
@@ -14,6 +18,7 @@
           <span
             @click="redirect({ name: 'vjezba-1-dizalo' })"
             class="badge badge-pill pill shadow"
+            :class="{ 'active-route': route.name == 'vjezba-1-dizalo' }"
             >Vježba 1 - Dizalo</span
           >
         </li>
@@ -21,6 +26,7 @@
           <span
             @click="redirect({ name: 'vjezba-3' })"
             class="badge badge-pill pill shadow"
+            :class="{ 'active-route': route.name == 'vjezba-3' }"
             >Vježba 3</span
           >
         </li>
@@ -31,7 +37,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import logo from "@/components/logo.vue";
 
 interface Route {
@@ -45,13 +51,15 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter();
+    const route = useRoute();
 
     function redirect(route: Route) {
       router.push({ name: route.name });
     }
 
     return {
-      redirect
+      redirect,
+      route
     };
   }
 });
@@ -87,5 +95,8 @@ export default defineComponent({
 }
 .pill:hover {
   background-color: grey;
+}
+.active-route {
+  background-color: var(--vue-logo-green);
 }
 </style>
