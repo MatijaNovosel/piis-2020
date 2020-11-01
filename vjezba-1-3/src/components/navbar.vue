@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar sticky-top navbar-expand navbar-light navbar-general">
-    <span class="navbar-logo"><logo class="mr-3 mb-1" />PIIS 2020</span>
+    <span class="navbar-logo"><logo class="mr-3 mb-1" />PIIS 2020 <span class="subtitle-text ml-2">Matija Novosel</span></span>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item mr-3">
@@ -65,6 +65,10 @@ export default defineComponent({
   color: #273849;
   font-family: "Dosis", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
   font-weight: 500;
+}
+.subtitle-text {
+  color: grey;
+  font-size: 12px;
 }
 .pill {
   font-size: 12px;
