@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import vjezba1 from '../views/vjezba-1.vue'
+import vjezba1sat from '../views/vjezba-1-sat.vue'
+import vjezba1dizalo from '../views/vjezba-1-dizalo.vue'
 import vjezba3 from '../views/vjezba-3.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'vjezba-1',
-    component: vjezba1
+    name: 'vjezba-1-sat',
+    component: vjezba1sat
+  },
+  {
+    path: '/vjezba-1-dizalo',
+    name: 'vjezba-1-dizalo',
+    component: vjezba1dizalo
   },
   {
     path: '/vjezba-3',

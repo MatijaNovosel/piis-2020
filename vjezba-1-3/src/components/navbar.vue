@@ -5,9 +5,16 @@
       <ul class="navbar-nav mx-auto">
         <li class="nav-item mr-3">
           <span
-            @click="redirect({ name: 'vjezba-1' })"
+            @click="redirect({ name: 'vjezba-1-sat' })"
             class="badge badge-pill pill"
-            >Vježba 1</span
+            >Vježba 1 - Sat</span
+          >
+        </li>
+        <li class="nav-item mr-3">
+          <span
+            @click="redirect({ name: 'vjezba-1-dizalo' })"
+            class="badge badge-pill pill"
+            >Vježba 1 - Dizalo</span
           >
         </li>
         <li class="nav-item">
