@@ -304,16 +304,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.elevator {
-  font-size: 25px;
-  background-color: black;
-  color: hotpink;
-  padding: 12px;
-  border-radius: 10px;
-  width: 200px;
-  display: block;
-  margin: 0 auto;
-}
 .state-pill {
   background-color: var(--vue-logo-green);
   padding: 10px;
