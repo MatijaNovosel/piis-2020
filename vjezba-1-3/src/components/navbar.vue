@@ -6,28 +6,12 @@
     >
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item mr-3">
+        <li class="nav-item mx-2" v-for="(item, i) in navigationLinks" :key="i">
           <span
-            @click="redirect({ name: 'vjezba-1-sat' })"
+            @click="redirect(item.name)"
             class="badge badge-pill pill shadow"
-            :class="{ 'active-route': route.name == 'vjezba-1-sat' }"
-            >Vježba 1 - Sat</span
-          >
-        </li>
-        <li class="nav-item mr-3">
-          <span
-            @click="redirect({ name: 'vjezba-1-dizalo' })"
-            class="badge badge-pill pill shadow"
-            :class="{ 'active-route': route.name == 'vjezba-1-dizalo' }"
-            >Vježba 1 - Dizalo</span
-          >
-        </li>
-        <li class="nav-item">
-          <span
-            @click="redirect({ name: 'vjezba-3' })"
-            class="badge badge-pill pill shadow"
-            :class="{ 'active-route': route.name == 'vjezba-3' }"
-            >Vježba 3</span
+            :class="{ 'active-route': route.name == item.name }"
+            >{{ item.title }}</span
           >
         </li>
       </ul>
@@ -42,6 +26,7 @@ import logo from "@/components/logo.vue";
 
 interface Route {
   name: string;
+  title: string;
 }
 
 export default defineComponent({
@@ -53,13 +38,29 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
 
-    function redirect(route: Route) {
-      router.push({ name: route.name });
+    const navigationLinks: Array<Route> = [
+      {
+        name: "vjezba-1-sat",
+        title: "Vježba 1 - Sat"
+      },
+      {
+        name: "vjezba-1-dizalo",
+        title: "Vježba 1 - Dizalo"
+      },
+      {
+        name: "vjezba-3",
+        title: "Vježba 3"
+      }
+    ];
+
+    function redirect(name: string) {
+      router.push({ name });
     }
 
     return {
       redirect,
-      route
+      route,
+      navigationLinks
     };
   }
 });
