@@ -8,15 +8,15 @@
 */
 
 abstract class DatabaseManager {
-	private string $_server = "";
-	private string $_password = "";
-	private string $_username = "";
-	private string $_database = "";
-	private $_connection = null;
+	protected string $_server = "";
+	protected string $_password = "";
+	protected string $_username = "";
+	protected string $_database = "";
+	protected $_connection = null;
 	
-	abstract protected function connect();
-	abstract protected function select(string $query);
-	abstract protected function disconnect();
+	abstract public function connect();
+	abstract public function select(string $query);
+	abstract public function disconnect();
 	
 	public function __construct(string $server, string $password, string $username, string $database) {
 		$this->_server = $server;
