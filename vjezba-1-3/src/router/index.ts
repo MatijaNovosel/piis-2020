@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import vjezba1sat from '../views/vjezba-1-sat.vue'
 import vjezba1dizalo from '../views/vjezba-1-dizalo.vue'
+import vjezba2 from '../views/vjezba-2.vue'
 import vjezba3 from '../views/vjezba-3.vue'
 
 const routes: Array<RouteRecordRaw> = [
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/vjezba-1-dizalo',
     name: 'vjezba-1-dizalo',
     component: vjezba1dizalo
+  },
+  {
+    path: '/vjezba-2',
+    name: 'vjezba-2',
+    component: vjezba2
   },
   {
     path: '/vjezba-3',

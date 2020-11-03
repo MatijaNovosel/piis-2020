@@ -48,6 +48,10 @@ export default defineComponent({
         title: "Vježba 1 - Dizalo"
       },
       {
+        name: "vjezba-2",
+        title: "Vježba 2"
+      },
+      {
         name: "vjezba-3",
         title: "Vježba 3"
       }

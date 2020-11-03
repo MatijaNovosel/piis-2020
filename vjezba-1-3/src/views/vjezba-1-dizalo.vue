@@ -173,27 +173,27 @@ class Elevator extends Automat<ElevatorState, Button> {
         break;
       }
       case Button.b: {
-        if ([ElevatorState.Waiting1].includes(currentState))
+        if (currentState == ElevatorState.Waiting1)
           res.state = ElevatorState.ClosingDoor;
         break;
       }
       case Button.c: {
-        if ([ElevatorState.ClosingDoor].includes(currentState))
+        if (currentState == ElevatorState.ClosingDoor)
           res.state = ElevatorState.Moving;
         break;
       }
       case Button.d: {
-        if ([ElevatorState.Waiting2].includes(currentState))
+        if (currentState == ElevatorState.Waiting2)
           res.state = ElevatorState.OpeningDoor;
         break;
       }
       case Button.e: {
-        if ([ElevatorState.OpeningDoor].includes(currentState))
+        if (currentState == ElevatorState.OpeningDoor)
           res.state = ElevatorState.Standby;
         break;
       }
       case Button.f: {
-        if ([ElevatorState.Standby].includes(currentState))
+        if (currentState == ElevatorState.Standby)
           res.state = ElevatorState.Terminated;
         break;
       }
