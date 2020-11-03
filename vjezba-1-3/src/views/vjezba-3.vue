@@ -1,8 +1,10 @@
 <template>
-  <div class="row text-center no-gutters">
-    <div class="col-12 mt-5">
-      <img :src="require('@/assets/elevator/elevator-diagram-empty.png')" />
-    </div>
+  <div class="row no-gutters justify-content-center">
+    <group-box title="UML dijagram">
+      <div class="col-12">
+        <img :src="require('@/assets/clock-state-diagram.png')" />
+      </div>
+    </group-box>
   </div>
 </template>
 
@@ -10,19 +12,19 @@
 import { defineComponent, reactive, onMounted } from "vue";
 
 class ClockController {
-  incrementHours() {
+  incrementHours(): void {
     //
   }
-  incrementMinutes() {
+  incrementMinutes(): void {
     //
   }
-  incrementSeconds() {
+  incrementSeconds(): void {
     //
   }
-  stop() {
+  stop(): void {
     //
   }
-  doNothing() {
+  doNothing(): void {
     // Do nothing
   }
 }
@@ -34,52 +36,52 @@ interface ClockState {
 }
 
 class BlinkHoursClockState implements ClockState {
-  button1(clock: Clock) {
+  button1(clock: Clock): void {
     clock.setBlinkingSeconds();
   }
-  button2(clock: Clock) {
+  button2(clock: Clock): void {
     clock.incrementHours();
   }
-  button1And2(clock: Clock) {
+  button1And2(clock: Clock): void {
     clock.setStopped();
     clock.stop();
   }
 }
 
 class BlinkMinutesClockState implements ClockState {
-  button1(clock: Clock) {
+  button1(clock: Clock): void {
     clock.setBlinkingSeconds();
   }
-  button2(clock: Clock) {
+  button2(clock: Clock): void {
     clock.incrementMinutes();
   }
-  button1And2(clock: Clock) {
+  button1And2(clock: Clock): void {
     clock.setStopped();
     clock.stop();
   }
 }
 
 class BlinkSecondsClockState implements ClockState {
-  button1(clock: Clock) {
+  button1(clock: Clock): void {
     clock.doNothing();
   }
-  button2(clock: Clock) {
+  button2(clock: Clock): void {
     clock.incrementSeconds();
   }
-  button1And2(clock: Clock) {
+  button1And2(clock: Clock): void {
     clock.setStopped();
     clock.stop();
   }
 }
 
 class StoppedClockState implements ClockState {
-  button1(clock: Clock) {
+  button1(clock: Clock): void {
     clock.doNothing();
   }
-  button2(clock: Clock) {
+  button2(clock: Clock): void {
     clock.doNothing();
   }
-  button1And2(clock: Clock) {
+  button1And2(clock: Clock): void {
     clock.doNothing();
   }
 }
@@ -94,32 +96,32 @@ class Clock {
   private _state?: ClockState | null;
 
   // Checker methods
-  isBlinkingHours() {
+  isBlinkingHours(): boolean {
     return this._state == this._blinkHoursClockState;
   }
 
-  isBlinkingMinutes() {
+  isBlinkingMinutes(): boolean {
     return this._state == this._blinkMinutesClockState;
   }
 
-  isBlinkingSeconds() {
+  isBlinkingSeconds(): boolean {
     return this._state == this._blinkSecondsClockState;
   }
 
-  isStopped() {
+  isStopped(): boolean {
     return this._state == this._stoppedClockState;
   }
 
   // State setters
-  setBlinkingMinutes() {
+  setBlinkingMinutes(): void {
     this._state = this._blinkMinutesClockState;
   }
 
-  setBlinkingSeconds() {
+  setBlinkingSeconds(): void {
     this._state = this._blinkSecondsClockState;
   }
 
-  setStopped() {
+  setStopped(): void {
     this._state = this._stoppedClockState;
   }
 
@@ -137,19 +139,19 @@ class Clock {
   }
 
   // Actions
-  incrementHours() {
+  incrementHours(): void {
     this._controller?.incrementHours();
   }
 
-  incrementMinutes() {
+  incrementMinutes(): void {
     this._controller?.incrementMinutes();
   }
 
-  incrementSeconds() {
+  incrementSeconds(): void {
     this._controller?.incrementSeconds();
   }
 
-  stop() {
+  stop(): void {
     this._controller?.stop();
   }
 
