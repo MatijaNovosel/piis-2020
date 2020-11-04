@@ -1,25 +1,89 @@
 <template>
-  <div class="row no-gutters justify-content-center">
-    <group-box title="UML dijagram">
-      <div class="col-12">
-        <img :src="require('@/assets/clock-state-diagram.png')" />
+  <div class="row text-center no-gutters justify-content-center">
+    <div class="col-8">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <group-box title="Simulacija" class="mx-auto">
+            <div class="row">
+              <div class="col-12">
+                <span class="digital-clock-font clock shadow">{{
+                  state.time
+                }}</span>
+              </div>
+              <div class="col-12 mt-4">
+                <span
+                  style="font-size: 14px"
+                  class="badge badge-pill badge-primary shadow state-pill"
+                  >Stanje: {{ clockState() }}</span
+                >
+              </div>
+            </div>
+          </group-box>
+        </div>
+        <div class="col-12 my-5">
+          <group-box title="Akcije" class="mx-auto">
+            <button
+              @click="action(Action.Button1)"
+              type="button"
+              class="btn btn-primary shadow"
+            >
+              Button1
+            </button>
+            <button
+              @click="action(Action.Button2)"
+              type="button"
+              class="btn btn-primary mx-3 shadow"
+            >
+              Button2
+            </button>
+            <button
+              @click="action(Action.Button1And2)"
+              type="button"
+              class="btn btn-primary shadow"
+            >
+              Button1And2
+            </button>
+          </group-box>
+        </div>
+        <div class="col-12 mb-5">
+          <group-box title="Dijagram" class="mx-auto">
+            <img :src="require('@/assets/clock-state-diagram.png')" />
+          </group-box>
+        </div>
       </div>
-    </group-box>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted } from "vue";
 
+enum Action {
+  Button1 = 1,
+  Button2 = 2,
+  Button1And2 = 3
+}
+
+interface State {
+  clock?: Clock | null;
+  clockController?: ClockController | null;
+  interval: number;
+  offsetHours: number;
+  offsetMinutes: number;
+  offsetSeconds: number;
+  blinking: boolean;
+  time: string;
+}
+
 class ClockController {
-  incrementHours(): void {
-    //
+  incrementHours(state: State): void {
+    state.offsetHours++;
   }
-  incrementMinutes(): void {
-    //
+  incrementMinutes(state: State): void {
+    state.offsetMinutes++;
   }
-  incrementSeconds(): void {
-    //
+  incrementSeconds(state: State): void {
+    state.offsetSeconds++;
   }
   stop(): void {
     //
@@ -37,7 +101,7 @@ interface ClockState {
 
 class BlinkHoursClockState implements ClockState {
   button1(clock: Clock): void {
-    clock.setBlinkingSeconds();
+    clock.setBlinkingMinutes();
   }
   button2(clock: Clock): void {
     clock.incrementHours();
@@ -94,22 +158,23 @@ class Clock {
 
   private _controller?: ClockController | null;
   private _state?: ClockState | null;
+  private _pageState: State;
 
   // Checker methods
   isBlinkingHours(): boolean {
-    return this._state == this._blinkHoursClockState;
+    return this._state instanceof BlinkHoursClockState;
   }
 
   isBlinkingMinutes(): boolean {
-    return this._state == this._blinkMinutesClockState;
+    return this._state instanceof BlinkMinutesClockState;
   }
 
   isBlinkingSeconds(): boolean {
-    return this._state == this._blinkSecondsClockState;
+    return this._state instanceof BlinkSecondsClockState;
   }
 
   isStopped(): boolean {
-    return this._state == this._stoppedClockState;
+    return this._state instanceof StoppedClockState;
   }
 
   // State setters
@@ -140,15 +205,15 @@ class Clock {
 
   // Actions
   incrementHours(): void {
-    this._controller?.incrementHours();
+    this._controller?.incrementHours(this._pageState);
   }
 
   incrementMinutes(): void {
-    this._controller?.incrementMinutes();
+    this._controller?.incrementMinutes(this._pageState);
   }
 
   incrementSeconds(): void {
-    this._controller?.incrementSeconds();
+    this._controller?.incrementSeconds(this._pageState);
   }
 
   stop(): void {
@@ -159,16 +224,11 @@ class Clock {
     this._controller?.doNothing();
   }
 
-  constructor(action: ClockController) {
+  constructor(action: ClockController, pageState: State) {
     this._controller = action;
+    this._pageState = pageState;
     this._state = new BlinkHoursClockState();
   }
-}
-
-interface State {
-  clock?: Clock | null;
-  clockController?: ClockController | null;
-  interval: number;
 }
 
 export default defineComponent({
@@ -177,15 +237,101 @@ export default defineComponent({
     const state: State = reactive({
       clock: null,
       clockController: null,
-      interval: -1
+      interval: -1,
+      offsetHours: 0,
+      offsetMinutes: 0,
+      offsetSeconds: 0,
+      blinking: false,
+      time: "00:00:00"
     });
+
+    function action(act: Action): void {
+      switch (act) {
+        case Action.Button1: {
+          state.clock?.button1();
+          break;
+        }
+        case Action.Button2: {
+          state.clock?.button2();
+          break;
+        }
+        case Action.Button1And2: {
+          state.clock?.button1And2();
+          break;
+        }
+      }
+    }
+
+    function updateTime(): void {
+      state.blinking = !state.blinking;
+      const date = new Date();
+
+      const hourOverflow = Math.floor(
+        (date.getMinutes() + state.offsetMinutes) / 60
+      );
+      const minutesOverflow = Math.floor(
+        (date.getSeconds() + state.offsetSeconds) / 60
+      );
+
+      const h = (date.getHours() + state.offsetHours + hourOverflow) % 24;
+      const m =
+        (date.getMinutes() + state.offsetMinutes + minutesOverflow) % 60;
+      const s = (date.getSeconds() + state.offsetMinutes) % 60;
+
+      const hours = h.toString().padStart(2, "0");
+      const minutes = m.toString().padStart(2, "0");
+      const seconds = s.toString().padStart(2, "0");
+
+      state.time = `${
+        state.clock?.isBlinkingHours() && state.blinking ? "  " : hours
+      }:${
+        state.clock?.isBlinkingMinutes() && state.blinking ? "  " : minutes
+      }:${state.clock?.isBlinkingSeconds() && state.blinking ? "  " : seconds}`;
+    }
+
+    function clockState(): string {
+      if (state.clock?.isBlinkingHours()) {
+        return "BLINKANJE SATI";
+      } else if (state.clock?.isBlinkingMinutes()) {
+        return "BLINKANJE MINUTA";
+      } else if (state.clock?.isBlinkingSeconds()) {
+        return "BLINKANJE SEKUNDI";
+      } else {
+        return "ZAUSTAVLJENO BLINKANJE";
+      }
+    }
 
     onMounted(() => {
       state.clockController = new ClockController();
-      state.clock = new Clock(state.clockController);
+      state.clock = new Clock(state.clockController, state);
+      state.interval = setInterval(() => {
+        updateTime();
+      }, 1000);
     });
 
-    return { state };
+    return { state, action, Action, clockState };
   }
 });
 </script>
+
+<style scoped>
+.clock {
+  font-size: 25px;
+  background-color: black;
+  color: hotpink;
+  padding: 12px;
+  border-radius: 10px;
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.state-pill {
+  background-color: var(--vue-logo-green);
+  padding: 10px;
+}
+
+.btn {
+  border-radius: 6px;
+}
+</style>
