@@ -54,6 +54,10 @@ export default defineComponent({
       {
         name: "vjezba-3",
         title: "Vježba 3"
+      },
+      {
+        name: "vjezba-4",
+        title: "Vježba 4"
       }
     ];
 

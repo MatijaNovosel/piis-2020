@@ -1,14 +1,18 @@
 <template>
-  <div class="row no-gutters mx-5">
-    <div class="col-12 text-center">
-      <group-box title="UML dijagram">
-        <img :src="require('@/assets/uml-diagram.png')" />
-      </group-box>
-    </div>
-    <div class="col-12 mt-4">
-      <group-box title="Implementacija">
-        <div v-html="content" />
-      </group-box>
+  <div class="row no-gutters mx-5 justify-content-center">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-12 text-center">
+          <group-box title="UML dijagram">
+            <img :src="require('@/assets/uml-diagram.png')" />
+          </group-box>
+        </div>
+        <div class="col-12 mt-4">
+          <group-box title="Implementacija">
+            <div v-html="content" />
+          </group-box>
+        </div>
+      </div>
     </div>
   </div>
 </template>
